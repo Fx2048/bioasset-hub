@@ -98,27 +98,26 @@ export function BioAssetProvider({ children }: { children: ReactNode }) {
     logout,
     isAdmin: user?.rol === "administrador",
     addEquipment: (e) =>
-      setDb((d) => ({
-        ...d,
-        equipment: [...d.equipment, { ...e, id: uid(), activo: true }],
-        movements: [
-          ...d.movements,
-          {
-            id: uid(),
-            equipoId: "",
-            origenId: null,
-            destinoId: e.ubicacionId,
-            fecha: new Date().toISOString(),
-            usuarioId: userId ?? "u1",
-            motivo: "Ingreso al inventario",
-            observaciones: "Registro inicial del equipo.",
-          },
-        ].map((m, i, arr) =>
-          i === arr.length - 1 && m.equipoId === ""
-            ? { ...m, equipoId: d.equipment.length ? m.equipoId : m.equipoId }
-            : m,
-        ),
-      })),
+      setDb((d) => {
+        const id = uid();
+        return {
+          ...d,
+          equipment: [...d.equipment, { ...e, id, activo: true }],
+          movements: [
+            ...d.movements,
+            {
+              id: uid(),
+              equipoId: id,
+              origenId: null,
+              destinoId: e.ubicacionId,
+              fecha: new Date().toISOString(),
+              usuarioId: userId ?? "u1",
+              motivo: "Ingreso al inventario",
+              observaciones: "Registro inicial del equipo.",
+            },
+          ],
+        };
+      }),
     updateEquipment: (id, patch) =>
       setDb((d) => ({
         ...d,
