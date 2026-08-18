@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TrazabilidadRouteImport } from './routes/trazabilidad'
 import { Route as EquiposIndexRouteImport } from './routes/equipos.index'
 import { Route as EquiposIdRouteImport } from './routes/equipos.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrazabilidadRoute = TrazabilidadRouteImport.update({
+  id: '/trazabilidad',
+  path: '/trazabilidad',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EquiposIndexRoute = EquiposIndexRouteImport.update({
@@ -31,30 +37,34 @@ const EquiposIdRoute = EquiposIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/trazabilidad': typeof TrazabilidadRoute
   '/equipos/$id': typeof EquiposIdRoute
   '/equipos/': typeof EquiposIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/trazabilidad': typeof TrazabilidadRoute
   '/equipos/$id': typeof EquiposIdRoute
   '/equipos': typeof EquiposIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/trazabilidad': typeof TrazabilidadRoute
   '/equipos/$id': typeof EquiposIdRoute
   '/equipos/': typeof EquiposIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/equipos/$id' | '/equipos/'
+  fullPaths: '/' | '/trazabilidad' | '/equipos/$id' | '/equipos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/equipos/$id' | '/equipos'
-  id: '__root__' | '/' | '/equipos/$id' | '/equipos/'
+  to: '/' | '/trazabilidad' | '/equipos/$id' | '/equipos'
+  id: '__root__' | '/' | '/trazabilidad' | '/equipos/$id' | '/equipos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TrazabilidadRoute: typeof TrazabilidadRoute
   EquiposIdRoute: typeof EquiposIdRoute
   EquiposIndexRoute: typeof EquiposIndexRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trazabilidad': {
+      id: '/trazabilidad'
+      path: '/trazabilidad'
+      fullPath: '/trazabilidad'
+      preLoaderRoute: typeof TrazabilidadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/equipos/': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TrazabilidadRoute: TrazabilidadRoute,
   EquiposIdRoute: EquiposIdRoute,
   EquiposIndexRoute: EquiposIndexRoute,
 }
