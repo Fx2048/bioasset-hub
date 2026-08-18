@@ -34,7 +34,7 @@ function Field({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div>
       <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
-      <p className="mt-0.5 text-sm font-medium">{value}</p>
+      <div className="mt-0.5 text-sm font-medium">{value}</div>
     </div>
   );
 }
