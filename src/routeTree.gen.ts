@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlertasRouteImport } from './routes/alertas'
+import { Route as MantenimientoRouteImport } from './routes/mantenimiento'
+import { Route as TrazabilidadRouteImport } from './routes/trazabilidad'
+import { Route as UbicacionesRouteImport } from './routes/ubicaciones'
+import { Route as UsuariosRouteImport } from './routes/usuarios'
+import { Route as EquiposIndexRouteImport } from './routes/equipos.index'
+import { Route as EquiposIdRouteImport } from './routes/equipos.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlertasRoute = AlertasRouteImport.update({
+  id: '/alertas',
+  path: '/alertas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MantenimientoRoute = MantenimientoRouteImport.update({
+  id: '/mantenimiento',
+  path: '/mantenimiento',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrazabilidadRoute = TrazabilidadRouteImport.update({
+  id: '/trazabilidad',
+  path: '/trazabilidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UbicacionesRoute = UbicacionesRouteImport.update({
+  id: '/ubicaciones',
+  path: '/ubicaciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsuariosRoute = UsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquiposIndexRoute = EquiposIndexRouteImport.update({
+  id: '/equipos/',
+  path: '/equipos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquiposIdRoute = EquiposIdRouteImport.update({
+  id: '/equipos/$id',
+  path: '/equipos/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alertas': typeof AlertasRoute
+  '/mantenimiento': typeof MantenimientoRoute
+  '/trazabilidad': typeof TrazabilidadRoute
+  '/ubicaciones': typeof UbicacionesRoute
+  '/usuarios': typeof UsuariosRoute
+  '/equipos/$id': typeof EquiposIdRoute
+  '/equipos/': typeof EquiposIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alertas': typeof AlertasRoute
+  '/mantenimiento': typeof MantenimientoRoute
+  '/trazabilidad': typeof TrazabilidadRoute
+  '/ubicaciones': typeof UbicacionesRoute
+  '/usuarios': typeof UsuariosRoute
+  '/equipos/$id': typeof EquiposIdRoute
+  '/equipos': typeof EquiposIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alertas': typeof AlertasRoute
+  '/mantenimiento': typeof MantenimientoRoute
+  '/trazabilidad': typeof TrazabilidadRoute
+  '/ubicaciones': typeof UbicacionesRoute
+  '/usuarios': typeof UsuariosRoute
+  '/equipos/$id': typeof EquiposIdRoute
+  '/equipos/': typeof EquiposIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/alertas'
+    | '/mantenimiento'
+    | '/trazabilidad'
+    | '/ubicaciones'
+    | '/usuarios'
+    | '/equipos/$id'
+    | '/equipos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/alertas'
+    | '/mantenimiento'
+    | '/trazabilidad'
+    | '/ubicaciones'
+    | '/usuarios'
+    | '/equipos/$id'
+    | '/equipos'
+  id:
+    | '__root__'
+    | '/'
+    | '/alertas'
+    | '/mantenimiento'
+    | '/trazabilidad'
+    | '/ubicaciones'
+    | '/usuarios'
+    | '/equipos/$id'
+    | '/equipos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlertasRoute: typeof AlertasRoute
+  MantenimientoRoute: typeof MantenimientoRoute
+  TrazabilidadRoute: typeof TrazabilidadRoute
+  UbicacionesRoute: typeof UbicacionesRoute
+  UsuariosRoute: typeof UsuariosRoute
+  EquiposIdRoute: typeof EquiposIdRoute
+  EquiposIndexRoute: typeof EquiposIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alertas': {
+      id: '/alertas'
+      path: '/alertas'
+      fullPath: '/alertas'
+      preLoaderRoute: typeof AlertasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mantenimiento': {
+      id: '/mantenimiento'
+      path: '/mantenimiento'
+      fullPath: '/mantenimiento'
+      preLoaderRoute: typeof MantenimientoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trazabilidad': {
+      id: '/trazabilidad'
+      path: '/trazabilidad'
+      fullPath: '/trazabilidad'
+      preLoaderRoute: typeof TrazabilidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ubicaciones': {
+      id: '/ubicaciones'
+      path: '/ubicaciones'
+      fullPath: '/ubicaciones'
+      preLoaderRoute: typeof UbicacionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/usuarios': {
+      id: '/usuarios'
+      path: '/usuarios'
+      fullPath: '/usuarios'
+      preLoaderRoute: typeof UsuariosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipos/': {
+      id: '/equipos/'
+      path: '/equipos'
+      fullPath: '/equipos/'
+      preLoaderRoute: typeof EquiposIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipos/$id': {
+      id: '/equipos/$id'
+      path: '/equipos/$id'
+      fullPath: '/equipos/$id'
+      preLoaderRoute: typeof EquiposIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlertasRoute: AlertasRoute,
+  MantenimientoRoute: MantenimientoRoute,
+  TrazabilidadRoute: TrazabilidadRoute,
+  UbicacionesRoute: UbicacionesRoute,
+  UsuariosRoute: UsuariosRoute,
+  EquiposIdRoute: EquiposIdRoute,
+  EquiposIndexRoute: EquiposIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
