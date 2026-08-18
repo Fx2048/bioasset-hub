@@ -31,7 +31,7 @@ interface Ctx {
   updateEquipment: (id: string, patch: Partial<Equipment>) => void;
   addMovement: (m: Omit<Movement, "id" | "usuarioId">) => void;
   addMaintenance: (m: Omit<MaintenanceRecord, "id">) => void;
-  saveLocation: (l: Omit<Location, "id"> & { id?: string }) => void;
+  saveLocation: (l: Omit<Location, "id"> & { id?: string | undefined }) => void;
   toggleLocation: (id: string) => void;
   toggleUser: (id: string) => void;
   locationName: (id: string | null) => string;

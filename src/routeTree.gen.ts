@@ -14,6 +14,7 @@ import { Route as AlertasRouteImport } from './routes/alertas'
 import { Route as MantenimientoRouteImport } from './routes/mantenimiento'
 import { Route as TrazabilidadRouteImport } from './routes/trazabilidad'
 import { Route as UbicacionesRouteImport } from './routes/ubicaciones'
+import { Route as UsuariosRouteImport } from './routes/usuarios'
 import { Route as EquiposIndexRouteImport } from './routes/equipos.index'
 import { Route as EquiposIdRouteImport } from './routes/equipos.$id'
 
@@ -42,6 +43,11 @@ const UbicacionesRoute = UbicacionesRouteImport.update({
   path: '/ubicaciones',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UsuariosRoute = UsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EquiposIndexRoute = EquiposIndexRouteImport.update({
   id: '/equipos/',
   path: '/equipos/',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/mantenimiento': typeof MantenimientoRoute
   '/trazabilidad': typeof TrazabilidadRoute
   '/ubicaciones': typeof UbicacionesRoute
+  '/usuarios': typeof UsuariosRoute
   '/equipos/$id': typeof EquiposIdRoute
   '/equipos/': typeof EquiposIndexRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/mantenimiento': typeof MantenimientoRoute
   '/trazabilidad': typeof TrazabilidadRoute
   '/ubicaciones': typeof UbicacionesRoute
+  '/usuarios': typeof UsuariosRoute
   '/equipos/$id': typeof EquiposIdRoute
   '/equipos': typeof EquiposIndexRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/mantenimiento': typeof MantenimientoRoute
   '/trazabilidad': typeof TrazabilidadRoute
   '/ubicaciones': typeof UbicacionesRoute
+  '/usuarios': typeof UsuariosRoute
   '/equipos/$id': typeof EquiposIdRoute
   '/equipos/': typeof EquiposIndexRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/mantenimiento'
     | '/trazabilidad'
     | '/ubicaciones'
+    | '/usuarios'
     | '/equipos/$id'
     | '/equipos/'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/mantenimiento'
     | '/trazabilidad'
     | '/ubicaciones'
+    | '/usuarios'
     | '/equipos/$id'
     | '/equipos'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/mantenimiento'
     | '/trazabilidad'
     | '/ubicaciones'
+    | '/usuarios'
     | '/equipos/$id'
     | '/equipos/'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   MantenimientoRoute: typeof MantenimientoRoute
   TrazabilidadRoute: typeof TrazabilidadRoute
   UbicacionesRoute: typeof UbicacionesRoute
+  UsuariosRoute: typeof UsuariosRoute
   EquiposIdRoute: typeof EquiposIdRoute
   EquiposIndexRoute: typeof EquiposIndexRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UbicacionesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/usuarios': {
+      id: '/usuarios'
+      path: '/usuarios'
+      fullPath: '/usuarios'
+      preLoaderRoute: typeof UsuariosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/equipos/': {
       id: '/equipos/'
       path: '/equipos'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   MantenimientoRoute: MantenimientoRoute,
   TrazabilidadRoute: TrazabilidadRoute,
   UbicacionesRoute: UbicacionesRoute,
+  UsuariosRoute: UsuariosRoute,
   EquiposIdRoute: EquiposIdRoute,
   EquiposIndexRoute: EquiposIndexRoute,
 }
