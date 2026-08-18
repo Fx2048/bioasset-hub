@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlertasRouteImport } from './routes/alertas'
 import { Route as MantenimientoRouteImport } from './routes/mantenimiento'
 import { Route as TrazabilidadRouteImport } from './routes/trazabilidad'
 import { Route as UbicacionesRouteImport } from './routes/ubicaciones'
@@ -19,6 +20,11 @@ import { Route as EquiposIdRouteImport } from './routes/equipos.$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlertasRoute = AlertasRouteImport.update({
+  id: '/alertas',
+  path: '/alertas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MantenimientoRoute = MantenimientoRouteImport.update({
@@ -49,6 +55,7 @@ const EquiposIdRoute = EquiposIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alertas': typeof AlertasRoute
   '/mantenimiento': typeof MantenimientoRoute
   '/trazabilidad': typeof TrazabilidadRoute
   '/ubicaciones': typeof UbicacionesRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alertas': typeof AlertasRoute
   '/mantenimiento': typeof MantenimientoRoute
   '/trazabilidad': typeof TrazabilidadRoute
   '/ubicaciones': typeof UbicacionesRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alertas': typeof AlertasRoute
   '/mantenimiento': typeof MantenimientoRoute
   '/trazabilidad': typeof TrazabilidadRoute
   '/ubicaciones': typeof UbicacionesRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/alertas'
     | '/mantenimiento'
     | '/trazabilidad'
     | '/ubicaciones'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/alertas'
     | '/mantenimiento'
     | '/trazabilidad'
     | '/ubicaciones'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/alertas'
     | '/mantenimiento'
     | '/trazabilidad'
     | '/ubicaciones'
@@ -101,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlertasRoute: typeof AlertasRoute
   MantenimientoRoute: typeof MantenimientoRoute
   TrazabilidadRoute: typeof TrazabilidadRoute
   UbicacionesRoute: typeof UbicacionesRoute
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alertas': {
+      id: '/alertas'
+      path: '/alertas'
+      fullPath: '/alertas'
+      preLoaderRoute: typeof AlertasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mantenimiento': {
@@ -157,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlertasRoute: AlertasRoute,
   MantenimientoRoute: MantenimientoRoute,
   TrazabilidadRoute: TrazabilidadRoute,
   UbicacionesRoute: UbicacionesRoute,
