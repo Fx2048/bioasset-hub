@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MantenimientoRouteImport } from './routes/mantenimiento'
 import { Route as TrazabilidadRouteImport } from './routes/trazabilidad'
 import { Route as EquiposIndexRouteImport } from './routes/equipos.index'
 import { Route as EquiposIdRouteImport } from './routes/equipos.$id'
@@ -17,6 +18,11 @@ import { Route as EquiposIdRouteImport } from './routes/equipos.$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MantenimientoRoute = MantenimientoRouteImport.update({
+  id: '/mantenimiento',
+  path: '/mantenimiento',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrazabilidadRoute = TrazabilidadRouteImport.update({
@@ -37,12 +43,14 @@ const EquiposIdRoute = EquiposIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mantenimiento': typeof MantenimientoRoute
   '/trazabilidad': typeof TrazabilidadRoute
   '/equipos/$id': typeof EquiposIdRoute
   '/equipos/': typeof EquiposIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mantenimiento': typeof MantenimientoRoute
   '/trazabilidad': typeof TrazabilidadRoute
   '/equipos/$id': typeof EquiposIdRoute
   '/equipos': typeof EquiposIndexRoute
@@ -50,20 +58,29 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/mantenimiento': typeof MantenimientoRoute
   '/trazabilidad': typeof TrazabilidadRoute
   '/equipos/$id': typeof EquiposIdRoute
   '/equipos/': typeof EquiposIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/trazabilidad' | '/equipos/$id' | '/equipos/'
+  fullPaths:
+    '/' | '/mantenimiento' | '/trazabilidad' | '/equipos/$id' | '/equipos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/trazabilidad' | '/equipos/$id' | '/equipos'
-  id: '__root__' | '/' | '/trazabilidad' | '/equipos/$id' | '/equipos/'
+  to: '/' | '/mantenimiento' | '/trazabilidad' | '/equipos/$id' | '/equipos'
+  id:
+    | '__root__'
+    | '/'
+    | '/mantenimiento'
+    | '/trazabilidad'
+    | '/equipos/$id'
+    | '/equipos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MantenimientoRoute: typeof MantenimientoRoute
   TrazabilidadRoute: typeof TrazabilidadRoute
   EquiposIdRoute: typeof EquiposIdRoute
   EquiposIndexRoute: typeof EquiposIndexRoute
@@ -76,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mantenimiento': {
+      id: '/mantenimiento'
+      path: '/mantenimiento'
+      fullPath: '/mantenimiento'
+      preLoaderRoute: typeof MantenimientoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/trazabilidad': {
@@ -104,6 +128,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MantenimientoRoute: MantenimientoRoute,
   TrazabilidadRoute: TrazabilidadRoute,
   EquiposIdRoute: EquiposIdRoute,
   EquiposIndexRoute: EquiposIndexRoute,
