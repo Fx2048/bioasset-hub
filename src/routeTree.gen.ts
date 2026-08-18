@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EquiposIndexRouteImport } from './routes/equipos.index'
+import { Route as EquiposIdRouteImport } from './routes/equipos.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,30 +23,39 @@ const EquiposIndexRoute = EquiposIndexRouteImport.update({
   path: '/equipos/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EquiposIdRoute = EquiposIdRouteImport.update({
+  id: '/equipos/$id',
+  path: '/equipos/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/equipos/$id': typeof EquiposIdRoute
   '/equipos/': typeof EquiposIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/equipos/$id': typeof EquiposIdRoute
   '/equipos': typeof EquiposIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/equipos/$id': typeof EquiposIdRoute
   '/equipos/': typeof EquiposIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/equipos/'
+  fullPaths: '/' | '/equipos/$id' | '/equipos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/equipos'
-  id: '__root__' | '/' | '/equipos/'
+  to: '/' | '/equipos/$id' | '/equipos'
+  id: '__root__' | '/' | '/equipos/$id' | '/equipos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EquiposIdRoute: typeof EquiposIdRoute
   EquiposIndexRoute: typeof EquiposIndexRoute
 }
 
@@ -65,11 +75,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EquiposIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/equipos/$id': {
+      id: '/equipos/$id'
+      path: '/equipos/$id'
+      fullPath: '/equipos/$id'
+      preLoaderRoute: typeof EquiposIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EquiposIdRoute: EquiposIdRoute,
   EquiposIndexRoute: EquiposIndexRoute,
 }
 export const routeTree = rootRouteImport
